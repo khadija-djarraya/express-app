@@ -1,7 +1,23 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+      style(type="text/css").
+          nav {
+              background-color: black;
+              margin:0;
+              padding:5px;
+          }
+          nav a{
+              color:aliceblue;
+              text-decoration: none;
+              margin: 0 10px 10px 0;
+          }
+
+      nav
+          ul 
+                  a(href="homepage.js" ) Home              
+                  a(href="our-services.js") Services              
+                  a(href="contact.js") Contact 
+      //link(rel='stylesheet', href='/stylesheets/style.css')
   body
     block content

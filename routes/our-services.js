@@ -6,10 +6,7 @@ var valid = require("../mychecker");
 router.get('/', function(req, res){
    if(valid()){
     res.render('our-services', {
-       name:"You can find our services here.", 
-       path1:"/",
-       path2:"/contact",
-       path3:"/our-services"
+       name:"You can find our services here."
     });
    }
    else res.send("you are using this website outside working hours.");

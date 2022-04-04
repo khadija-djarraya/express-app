@@ -3,13 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
-var servicesRouter = require('./routes/our-services.js')
-var homepageRouter=require('./routes/homepage');
-var contactRouter=require('./routes/contact')
+
+var usersRouter = require('./routes/users');
+var homeRouter = require('./routes/homepage');
+var contactRouter = require('./routes/contact');
+var servicesRouter = require('./routes/our-services');
+
 
 var app = express();
+app.listen(3004, function(){
+  console.log('Express listening on port', this.address().port);
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -20,25 +24,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-app.use('/our-services',servicesRouter);
-app.use(['/','/home'],homepageRouter);
+app.use(['/','/home'], homeRouter);
 app.use('/contact',contactRouter);
-// app.get('*',function(req,res){res.end('Hello World');});
+app.use('/our-services',servicesRouter);
+app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
-});
-
-
-
-const port =3004
-app.listen(port, function() {
-  console.log('The server is running, ' +
-      ' please, open your browser at http://localhost:%s', 
-      port);
 });
 
 // error handler

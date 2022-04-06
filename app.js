@@ -1,16 +1,14 @@
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var usersRouter = require('./routes/users');
 var homeRouter = require('./routes/homepage');
 var contactRouter = require('./routes/contact');
 var servicesRouter = require('./routes/our-services');
 
-
 var app = express();
+
 app.listen(3004, function(){
   console.log('Express listening on port', this.address().port);
 });
@@ -27,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(['/','/home'], homeRouter);
 app.use('/contact',contactRouter);
 app.use('/our-services',servicesRouter);
-app.use('/users', usersRouter);
 
 
 // catch 404 and forward to error handler
@@ -45,5 +42,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 module.exports = app;
